@@ -1,0 +1,12 @@
+C:\laragon\www\GameOfLife\Logic\bin\Debug\net9.0\Logic.deps.json
+C:\laragon\www\GameOfLife\Logic\bin\Debug\net9.0\Logic.dll
+C:\laragon\www\GameOfLife\Logic\bin\Debug\net9.0\Logic.pdb
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\Logic.AssemblyInfoInputs.cache
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\Logic.AssemblyInfo.cs
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\Logic.csproj.CoreCompileInputs.cache
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\Logic.sourcelink.json
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\Logic.dll
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\refint\Logic.dll
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\Logic.pdb
+C:\laragon\www\GameOfLife\Logic\obj\Debug\net9.0\ref\Logic.dll
