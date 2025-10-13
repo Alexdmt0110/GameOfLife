@@ -34,5 +34,24 @@ public class GameRules
 		survivalMax = max;
 	}
 
+	public void SetBirthCondition(int condition)
+	{
+		if (condition < 0 || condition > 8)
+		{
+			throw new ArgumentException("Invalid birth condition. Condition must be between 0 and 8.");
+		}
+		birthCondition = condition;
+	}
 
+	public bool ShouldLive(bool isCurrentlyAlive, int liveNeighbors)
+	{
+		if (isCurrentlyAlive)
+		{
+			return liveNeighbors >= survivalMin && liveNeighbors <= survivalMax;
+		}
+		else
+		{
+			return liveNeighbors == birthCondition;
+		}
+	}
 }
