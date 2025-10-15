@@ -16,6 +16,13 @@ public partial class GamePage : Page
     private bool currentPaintState = false;
     private readonly DispatcherTimer _timer;
     private int _speedMs = 300;
+    private ScaleTransform _scale = new() { ScaleX = 1, ScaleY = 1 };
+    private TranslateTransform _pan = new();
+    private bool _isPanning = false;
+    private Point _panStart;  
+    private Point _panOrigin; 
+
+
 
     public GamePage()
     {
@@ -26,8 +33,19 @@ public partial class GamePage : Page
         _timer.Interval = TimeSpan.FromMilliseconds(_speedMs);
         _timer.Tick += (_, __) => AdvanceOneGeneration();  
 
+        var tg = new TransformGroup();
+        tg.Children.Add(_scale);
+        tg.Children.Add(_pan);
+        GameCanvas.RenderTransform = tg;
+
+        GameCanvas.MouseWheel += GameCanvas_MouseWheel;     
+        GameCanvas.MouseDown  += GameCanvas_MouseDown;     
+        GameCanvas.MouseUp    += GameCanvas_MouseUp;        
+        GameCanvas.MouseMove  += GameCanvas_MouseMovePanOnly;
+
         GameCanvas.MouseLeftButtonUp += Canvas_MouseUp;
         GameCanvas.MouseMove += Canvas_MouseMove;
+
     }
 
     private void GamePage_Loaded(object sender, RoutedEventArgs e)
@@ -155,5 +173,67 @@ public partial class GamePage : Page
         int ms = (int)e.NewValue;
         SpeedLabel.Text = ms.ToString();
         SetSpeed(ms);
+    }
+
+    private void GameCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        const double factor = 1.1;
+
+        double k  = _scale.ScaleX;                   
+        double k2 = e.Delta > 0 ? k * factor : k / factor;
+        k2 = Math.Max(0.05, Math.Min(50.0, k2));      
+
+        Point w = e.GetPosition(GameCanvas);
+
+        _pan.X = _pan.X + (k - k2) * w.X;
+        _pan.Y = _pan.Y + (k - k2) * w.Y;
+
+        _scale.ScaleX = k2;
+        _scale.ScaleY = k2;
+
+        e.Handled = true; 
+    }
+
+
+
+    private void GameCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.MiddleButton == MouseButtonState.Pressed)
+        {
+            _isPanning = true;
+            _panStart = e.GetPosition(this);     
+            _panOrigin = new Point(_pan.X, _pan.Y);
+            GameCanvas.CaptureMouse();
+            e.Handled = true;
+        }
+    }
+
+    private void GameCanvas_MouseMovePanOnly(object sender, MouseEventArgs e)
+    {
+        if (!_isPanning) return;
+
+        Point now = e.GetPosition(this);
+        Vector delta = now - _panStart;
+
+        _pan.X = _panOrigin.X + delta.X;
+        _pan.Y = _panOrigin.Y + delta.Y;
+    }
+
+    private void GameCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+    {
+        if (_isPanning)
+        {
+            _isPanning = false;
+            GameCanvas.ReleaseMouseCapture();
+            e.Handled = true;
+        }
+    }
+
+
+    private void BtnClear_Click(object sender, RoutedEventArgs e)
+    {
+        Pause();
+        logicGrid.Clear();
+        DrawGrid();
     }
 }

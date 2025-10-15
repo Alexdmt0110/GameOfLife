@@ -79,4 +79,15 @@ public class Grid
 			}
 		}
 	}
+
+	public void Clear()
+	{
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				cells[r, c].IsAlive = false;
+			}
+		}
+	}
 }

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET9_0;NETCOREAPP
 C:\laragon\www\GameOfLife\IHM\App.xaml
-2-849203668
+3557841673
 
-5-534391745
+6-1417437954
 202-532944860
-GamePage.xaml;SettingsPage.xaml;
+GamePage.xaml;MainWindow.xaml;SettingsPage.xaml;
 
 False
 

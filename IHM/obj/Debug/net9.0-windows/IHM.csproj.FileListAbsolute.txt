@@ -25,3 +25,5 @@ C:\laragon\www\GameOfLife\IHM\obj\Debug\net9.0-windows\refint\IHM.dll
 C:\laragon\www\GameOfLife\IHM\obj\Debug\net9.0-windows\IHM.pdb
 C:\laragon\www\GameOfLife\IHM\obj\Debug\net9.0-windows\IHM.genruntimeconfig.cache
 C:\laragon\www\GameOfLife\IHM\obj\Debug\net9.0-windows\ref\IHM.dll
+C:\laragon\www\GameOfLife\IHM\obj\Debug\net9.0-windows\MainWindow.baml
+C:\laragon\www\GameOfLife\IHM\obj\Debug\net9.0-windows\MainWindow.g.cs
