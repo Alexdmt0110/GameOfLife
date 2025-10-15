@@ -5,15 +5,17 @@ public class Grid
 	private Cell[,] cells;
 	private int rows;
 	private int cols;
+	private GameRules gameRules;
 
 	public int Rows => rows;
 	public int Cols => cols;
 
-	public Grid(int rows, int cols)
+	public Grid(int rows, int cols, GameRules gameRules)
 	{
 		this.rows = rows;
 		this.cols = cols;
 		cells = new Cell[rows, cols];
+		this.gameRules = gameRules;
 
 		for (int r = 0; r < rows; r++)
 		{
@@ -54,5 +56,27 @@ public class Grid
 			}
 		}
 		return liveNeighbors;
+	}
+
+	public void NextGeneration()
+	{
+		bool[,] nextGenState = new bool[rows, cols]; 
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				Cell currentCell = GetCell(r, c);
+				int liveNeighbors = CountLiveNeighbors(r, c);
+				nextGenState[r, c] = gameRules.ShouldLive(currentCell.IsAlive, liveNeighbors);
+			}
+		}
+
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				cells[r, c].IsAlive = nextGenState[r, c];
+			}
+		}
 	}
 }
